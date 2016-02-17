@@ -1,0 +1,37 @@
+﻿<Page
+    x:Class="Six_Shooter.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Six_Shooter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <SplitView x:Name="SV" DisplayMode="CompactInline" CompactPaneLength="50" IsPaneOpen="False" HorizontalContentAlignment="Left" OpenPaneLength="156">
+            <SplitView.Pane>
+                <ListView>
+                    <ListView.Header >
+                        <ListViewHeaderItem x:Name="HamburgerButton" Tag="&#xE700;" Content="Six Shooter" Style="{StaticResource ListViewHeaderStyle}" Tapped="ExpandSV" />
+                    </ListView.Header>
+                    <ListViewItem x:Name="AddressButton" Tag="&#xE913;" Content="Address" Style="{StaticResource ListViewItemStyle}" Tapped="NewAddressPush">
+                        <FlyoutBase.AttachedFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Nearest Address" Tapped="NearestAddressTapped" Click="NearestAddressTapped"/>
+                                <MenuFlyoutItem Text="Geo Location" Click="GeoLocationTapped" Tapped="GeoLocationTapped" />
+                            </MenuFlyout>
+                        </FlyoutBase.AttachedFlyout>
+                    </ListViewItem>
+                    <ListViewItem x:Name="LinkButton" Tag="&#xE71B;" Content="Link" Style="{StaticResource ListViewItemStyle}" Tapped="NewLinkPush" />
+                    <ListViewItem x:Name="FileButton" Tag="&#xE8E5;" Content="File" Style="{StaticResource ListViewItemStyle}" Tapped="NewFilePush"/>
+                    <ListViewItem x:Name="NoteButton" Tag="&#xE70F;" Content="Note" Style="{StaticResource ListViewItemStyle}" Tapped="NewNotePush"/>
+                    <ListView.Footer>
+                        <ListViewItem x:Name="SettingsPage" Tag="&#xE713;" Content="Settings" Style="{StaticResource ListViewItemStyle}" Tapped="SettingsTapped"/>
+                    </ListView.Footer>
+                </ListView>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <ContentControl x:Name="CC"/>
+            </SplitView.Content>
+        </SplitView>
+    </Grid>
+</Page>
