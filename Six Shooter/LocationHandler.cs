@@ -19,6 +19,8 @@ using Windows.Services.Maps;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Windows.ApplicationModel.Background;
+using System.Net.Http;
+using Windows.Data.Json;
 
 namespace Six_Shooter
 {

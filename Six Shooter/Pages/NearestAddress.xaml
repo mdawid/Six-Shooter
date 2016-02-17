@@ -7,20 +7,28 @@
     xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     x:Class="Six_Shooter.Pages.NearestAddress"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel>
-            <TextBlock VerticalAlignment="Top" Height="56" Text="Nearest Address" FontSize="32"></TextBlock>
-            <TextBlock Text="Devices" FontSize="20"></TextBlock>
-            <ComboBox FontSize="16">
-                <ComboBoxItem Content="Phone"/>
-                <ComboBoxItem Content="Desktop"/>
-                <ComboBoxItem Content="Tablet"/>
-                <ComboBoxItem Content="Test"/>
-                <ComboBoxItem Content="Test"/>
-                <ComboBoxItem Content="Test"/>
-            </ComboBox>
-            <Maps:MapControl x:Name="MC" HorizontalAlignment="Left" Margin="10,417,0,0" VerticalAlignment="Top" Width="340" Height="213"/>
-        </StackPanel>
-    </Grid>
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock VerticalAlignment="Top" Height="56" Text="Nearest Address" FontSize="32"></TextBlock>
+        <TextBlock Text="Devices" FontSize="20" VerticalAlignment="Center" Margin="5,10,5,0"></TextBlock>
+        <ComboBox FontSize="16" Margin="5,2,0,0">
+            <ComboBoxItem Content="Phone"/>
+            <ComboBoxItem Content="Desktop"/>
+            <ComboBoxItem Content="Tablet"/>
+            <ComboBoxItem Content="Test"/>
+            <ComboBoxItem Content="Test"/>
+            <ComboBoxItem Content="Test"/>
+        </ComboBox>
+        <TextBlock Text="Contacts" FontSize="20" VerticalAlignment="Center" Margin="5,10,5,0"></TextBlock>
+        <ComboBox FontSize="16" Margin="5,2,0,0">
+            <ComboBoxItem Content="You"/>
+            <ComboBoxItem Content="Them"/>
+            <ComboBoxItem Content="Him"/>
+            <ComboBoxItem Content="That Guy"/>
+            <ComboBoxItem Content=" The Dude"/>
+        </ComboBox>
+        <TextBlock Text="Address to send" FontSize="20" VerticalAlignment="Center" Margin="5,10,0,0" ></TextBlock>
+        <TextBox x:Name="AddressToSendText" Margin="5,10,5,0" Text="" TextChanged="PreventNullAddress" />
+        <Button Content="Send!" Margin="5,24,0,0" Tapped="SendPush"/>
+        <Maps:MapControl x:Name="MC" Margin="5,20,5,0" ColorScheme="Dark" VerticalAlignment="Bottom" Height="253" />
+    </StackPanel>
 </Page>

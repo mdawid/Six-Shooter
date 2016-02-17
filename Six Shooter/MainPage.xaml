@@ -16,8 +16,8 @@
                     <ListViewItem x:Name="AddressButton" Tag="&#xE913;" Content="Address" Style="{StaticResource ListViewItemStyle}" Tapped="NewAddressPush">
                         <FlyoutBase.AttachedFlyout>
                             <MenuFlyout>
-                                <MenuFlyoutItem Text="Nearest Address" Tapped="NearestAddressTapped" Click="NearestAddressTapped"/>
-                                <MenuFlyoutItem Text="Geo Location" Click="GeoLocationTapped" Tapped="GeoLocationTapped" />
+                                <MenuFlyoutItem Text="Nearest Address" Tapped="NearestAddressTapped"/>
+                                <MenuFlyoutItem Text="Geo Location" Tapped="GeoLocationTapped" />
                             </MenuFlyout>
                         </FlyoutBase.AttachedFlyout>
                     </ListViewItem>

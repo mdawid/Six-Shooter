@@ -23,7 +23,7 @@ namespace Six_Shooter
     /// </summary>
     sealed partial class App : Application
     {
-        public LocationHandler LocHandler = new LocationHandler();
+        public static String BingKey = "KPY1TTaOsy2ltJ5g2R6X~YG-IPaG00h_BxqJv9bfy2Q~AqdYFGH6Aj1YKP1kLcF9aHvhmuug6K9HFWBHKhcbfFP7X54w9nGFUP-xgL765jpX";
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code

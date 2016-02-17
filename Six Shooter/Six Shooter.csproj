@@ -99,6 +99,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressValidator.cs" />
     <Compile Include="LocationHandler.cs" />
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
@@ -199,6 +200,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="Microsoft.NET.Native.Runtime.1.1, Version=1.1">
+      <Name>Microsoft .NET Native Runtime Package for Windows</Name>
+    </SDKReference>
     <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>

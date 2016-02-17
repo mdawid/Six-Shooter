@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Controls.Maps;
 using Windows.Services.Maps;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
+using Windows.UI;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,37 +29,61 @@ namespace Six_Shooter.Pages
     /// </summary>
     public sealed partial class NearestAddress : Page
     {
+        private LocationHandler LocHandler = new LocationHandler();
+        private MapLocationFinderResult _addresses = null;
+        private Brush _AddressBorderBrush = null;
+
         public NearestAddress()
         {
             this.InitializeComponent();
-            MC.MapServiceToken = "KPY1TTaOsy2ltJ5g2R6X~YG-IPaG00h_BxqJv9bfy2Q~AqdYFGH6Aj1YKP1kLcF9aHvhmuug6K9HFWBHKhcbfFP7X54w9nGFUP-xgL765jpX";
-            GetLocation();       
+            _AddressBorderBrush = AddressToSendText.BorderBrush;
+            //Bing map service token
+            MC.MapServiceToken = App.BingKey;
+            //Set the LocationHandler to 20 seconds
+            LocHandler._geolocator = new Geolocator { ReportInterval = 20000 };
+            //We want the best location we can get, so High.
+            LocHandler._geolocator.DesiredAccuracy = PositionAccuracy.High;
+            //Kick it
+            GetLocation();
         }
+
+
 
         async private void GetLocation()
         {
-            LocationHandler LocHandler = new LocationHandler();
-            LocHandler._geolocator = new Geolocator { ReportInterval = 20000 };
-            LocHandler._geolocator.DesiredAccuracy = PositionAccuracy.High;
-
-            Geoposition position = await LocHandler._geolocator.GetGeopositionAsync();
-            while (position == null)
-            {
-            }
-            MapLocationFinderResult addresses = await MapLocationFinder.FindLocationsAtAsync(position.Coordinate.Point);
-            await MC.TrySetViewAsync(position.Coordinate.Point, 16D);
-            DropPin(position, addresses);
-
+            LocHandler._position = await LocHandler._geolocator.GetGeopositionAsync();
+            _addresses = await MapLocationFinder.FindLocationsAtAsync(LocHandler._position.Coordinate.Point);
+            await MC.TrySetViewAsync(LocHandler._position.Coordinate.Point, 16D);
+            DropPin();
+            AddressToSendText.Text = _addresses.Locations.First().Address.FormattedAddress.ToString();
         }
 
-        private void DropPin(Geoposition position, MapLocationFinderResult addresses)
+        private void DropPin()
         {
             MapIcon MyLocation = new MapIcon();
-            MyLocation.Location = position.Coordinate.Point;
+            MyLocation.Location = LocHandler._position.Coordinate.Point;
             MyLocation.NormalizedAnchorPoint = new Point(1.0, 0.5);
-            MyLocation.Title = addresses.Locations.First().Address.FormattedAddress;
+            MyLocation.Title = _addresses.Locations.First().Address.FormattedAddress;
             MyLocation.Visible = true;
             MC.MapElements.Add(MyLocation);
+        }
+
+        private void PreventNullAddress(object sender, TextChangedEventArgs e)
+        {
+            if (AddressToSendText.Text == null || AddressToSendText.Text == "")
+            {
+                AddressToSendText.BorderBrush = new SolidColorBrush(Colors.Red);
+            }
+            else
+            {
+                AddressToSendText.BorderBrush = _AddressBorderBrush;
+            }
+        }
+
+        private async void SendPush(object sender, TappedRoutedEventArgs e)
+        {
+            AddressValidator Validator = new AddressValidator();
+            await Validator.Validate("12713 Pangolin Road", "Fort Worth", "76244", "TX", "US");
         }
     }
 }
