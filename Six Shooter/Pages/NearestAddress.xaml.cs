@@ -108,7 +108,7 @@ namespace Six_Shooter.Pages
             }
         }
 
-        private async Task<IUICommand> CreateSendDialog()
+        private async void CreateSendDialog(string Content)
         {
             var dialog = new MessageDialog("Address: goood.\nDestination: good.", "Ready to send.");
             dialog.Commands.Add(new UICommand("Yes") { Id = 0 });
@@ -119,7 +119,7 @@ namespace Six_Shooter.Pages
             dialog.Commands[1].Invoked += delegate { DontSendClicked(); };
 
             IUICommand result = await dialog.ShowAsync();
-            return result;
+            //return result;
         }
 
         private void SendClicked()
