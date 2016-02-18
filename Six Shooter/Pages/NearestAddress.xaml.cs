@@ -6,8 +6,11 @@ using Windows.Foundation;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Controls.Maps;
+using Windows.UI.Xaml;
 using Windows.Services.Maps;
 using Windows.UI;
+using Windows.UI.Popups;
+using System.Threading.Tasks;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -86,9 +89,45 @@ namespace Six_Shooter.Pages
             }
         }
 
+        private async void GetSelectedDestination(object sender, SelectionChangedEventArgs e)
+        {
+            //Contact selected but not device
+            if (ContactsComboBox.SelectedItem != null && DevicesComboBox.SelectedItem == null)
+            {
+                CreateSendDialog();
+            }
+            //Device selected but not contact
+            else if (DevicesComboBox.SelectedItem != null && ContactsComboBox.SelectedItem == null)
+            {
+                CreateSendDialog();
+            }
+            //Both must be selected as it wasn't one or the other.
+            else
+            {
 
+            }
+        }
 
-        private async void SendPush(object sender, TappedRoutedEventArgs e)
+        private async Task<IUICommand> CreateSendDialog()
+        {
+            var dialog = new MessageDialog("Address: goood.\nDestination: good.", "Ready to send.");
+            dialog.Commands.Add(new UICommand("Yes") { Id = 0 });
+            dialog.Commands.Add(new UICommand("No") { Id = 1 });
+            dialog.DefaultCommandIndex = 0;
+            dialog.CancelCommandIndex = 1;
+            dialog.Commands[0].Invoked += delegate { SendClicked(); };
+            dialog.Commands[1].Invoked += delegate { DontSendClicked(); };
+
+            IUICommand result = await dialog.ShowAsync();
+            return result;
+        }
+
+        private void SendClicked()
+        {
+
+        }
+
+        private void DontSendClicked()
         {
 
         }

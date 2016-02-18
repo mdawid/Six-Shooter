@@ -10,7 +10,7 @@
     <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock VerticalAlignment="Top" Height="56" Text="Nearest Address" FontSize="32"></TextBlock>
         <TextBlock Text="Devices" FontSize="20" VerticalAlignment="Center" Margin="5,10,5,0"></TextBlock>
-        <ComboBox FontSize="16" Margin="5,2,0,0">
+        <ComboBox x:Name="DevicesComboBox" FontSize="16" Margin="5,2,0,0" SelectionChanged="GetSelectedDestination">
             <ComboBoxItem Content="Phone"/>
             <ComboBoxItem Content="Desktop"/>
             <ComboBoxItem Content="Tablet"/>
@@ -19,7 +19,7 @@
             <ComboBoxItem Content="Test"/>
         </ComboBox>
         <TextBlock Text="Contacts" FontSize="20" VerticalAlignment="Center" Margin="5,10,5,0"></TextBlock>
-        <ComboBox FontSize="16" Margin="5,2,0,0">
+        <ComboBox x:Name="ContactsComboBox" FontSize="16" Margin="5,2,0,0" SelectionChanged="GetSelectedDestination">
             <ComboBoxItem Content="You"/>
             <ComboBoxItem Content="Them"/>
             <ComboBoxItem Content="Him"/>
@@ -28,7 +28,6 @@
         </ComboBox>
         <TextBlock Text="Address to send" FontSize="20" VerticalAlignment="Center" Margin="5,10,0,0" ></TextBlock>
         <TextBox x:Name="AddressToSendText" Margin="5,10,5,0" TextChanged="PreventBadAddress" />
-        <Button Content="Send!" Margin="5,24,0,0" Tapped="SendPush"/>
         <Maps:MapControl x:Name="MC" Margin="5,20,5,0" ColorScheme="Dark" VerticalAlignment="Bottom" Height="253" />
     </StackPanel>
 </Page>

@@ -17,7 +17,7 @@ namespace Six_Shooter
         }
 
         /// <summary>
-        /// This is the click handler for the 'StartTracking' button.
+        /// Requests access to geolocation. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

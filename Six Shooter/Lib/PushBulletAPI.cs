@@ -1,4 +1,4 @@
-﻿namespace Six_Shooter
+﻿namespace Six_Shooter.Lib
 {
     class PushBulletAPI
     {
