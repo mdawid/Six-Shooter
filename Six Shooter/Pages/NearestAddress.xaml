@@ -27,7 +27,7 @@
             <ComboBoxItem Content=" The Dude"/>
         </ComboBox>
         <TextBlock Text="Address to send" FontSize="20" VerticalAlignment="Center" Margin="5,10,0,0" ></TextBlock>
-        <TextBox x:Name="AddressToSendText" Margin="5,10,5,0" Text="" TextChanged="PreventNullAddress" />
+        <TextBox x:Name="AddressToSendText" Margin="5,10,5,0" TextChanged="PreventBadAddress" />
         <Button Content="Send!" Margin="5,24,0,0" Tapped="SendPush"/>
         <Maps:MapControl x:Name="MC" Margin="5,20,5,0" ColorScheme="Dark" VerticalAlignment="Bottom" Height="253" />
     </StackPanel>

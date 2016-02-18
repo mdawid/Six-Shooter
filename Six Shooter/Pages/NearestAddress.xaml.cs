@@ -32,6 +32,7 @@ namespace Six_Shooter.Pages
         private LocationHandler LocHandler = new LocationHandler();
         private MapLocationFinderResult _addresses = null;
         private Brush _AddressBorderBrush = null;
+        private string _MatchConfidence = null;
 
         public NearestAddress()
         {
@@ -68,9 +69,25 @@ namespace Six_Shooter.Pages
             MC.MapElements.Add(MyLocation);
         }
 
-        private void PreventNullAddress(object sender, TextChangedEventArgs e)
+        private async void PreventBadAddress(object sender, TextChangedEventArgs e)
         {
-            if (AddressToSendText.Text == null || AddressToSendText.Text == "")
+           Bing.Maps.Address address = new Bing.Maps.Address();
+
+            address.FormattedAddress = AddressToSendText.Text;
+
+            Lib.AddressValidator validator = new Lib.AddressValidator();
+
+            _MatchConfidence = await validator.Validate(address);
+
+            if (_MatchConfidence == "High")
+            {
+                AddressToSendText.BorderBrush = new SolidColorBrush(Colors.Green);
+            }
+            else if (_MatchConfidence == "Medium")
+            {
+                AddressToSendText.BorderBrush = new SolidColorBrush(Colors.Orange);
+            }
+            else if (_MatchConfidence == "BadAddress" || _MatchConfidence == "Low")
             {
                 AddressToSendText.BorderBrush = new SolidColorBrush(Colors.Red);
             }
@@ -80,10 +97,11 @@ namespace Six_Shooter.Pages
             }
         }
 
+
+
         private async void SendPush(object sender, TappedRoutedEventArgs e)
         {
-            AddressValidator Validator = new AddressValidator();
-            await Validator.Validate("12713 Pangolin Road", "Fort Worth", "76244", "TX", "US");
+
         }
     }
 }

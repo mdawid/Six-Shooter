@@ -149,5 +149,6 @@ namespace Six_Shooter
         {
             _position = position;
         }
+
     }
 }

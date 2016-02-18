@@ -99,7 +99,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddressValidator.cs" />
+    <Compile Include="Lib\AddressValidator.cs" />
+    <Compile Include="Lib\Utility.cs" />
     <Compile Include="LocationHandler.cs" />
     <Compile Include="Pages\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
